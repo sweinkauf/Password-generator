@@ -1,12 +1,12 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-included in password
+//included in password
 var special = [
   '@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.',
 ];
 
-var numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ];
 
 var lowerCase = [
   'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -36,6 +36,7 @@ function passwordPrompts() {
       return null;
     }
     var passwordOptions = {
+      length: pwLength,
       hasLowercase: hasLowercase, 
       hasUppercase: hasUppercase,
       hasNumbers: hasNumbers,
@@ -45,9 +46,35 @@ function passwordPrompts() {
 
   
 }
-console.log (passwordPrompts)
 
-function generatePassword() {}
+
+function generatePassword() {
+var options = passwordPrompts()
+var finalOptionsarray = []
+var password = ""
+console.log(options)
+if (options.hasLowercase){
+  finalOptionsarray.push(lowerCase)
+}
+if (options.hasUppercase){
+  finalOptionsarray.push(upperCase)
+}
+if (options.hasNumbers){
+  finalOptionsarray.push(numbers)
+}
+if (options.hasSpecial){
+  finalOptionsarray.push(special)
+}
+console.log(finalOptionsarray)
+
+for (i=0; i<=options.length; i++){
+    var newCharArray=finalOptionsarray[Math.floor(Math.random() * finalOptionsarray.length )]
+    var newChar = newCharArray [Math.floor(Math.random() * newCharArray.length )]
+    password=password + newChar
+}
+return password
+}
+
 
 
 // Write password to the #password input
@@ -62,12 +89,4 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-passwordPrompts()
 
-//generatePassword is going to take all the choices we made and use it to create password
-//were going to be using window.confirm method alert method
- //math.random and math.floor
- //concat method
- //push method
- // for loops
- // if statements and conditional statements true or false
